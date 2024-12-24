@@ -27,7 +27,7 @@ class MapController extends Controller
         $marineProtectedArea = MarineProtectedAreas::where('country_name', $country)->first();
 
         // Ambil path file polygon
-        $polygonPath = $marineProtectedArea ? asset('storage/' . $marineProtectedArea->polygon_data) : null;
+        $polygonPath = $marineProtectedArea ? Storage::url($marineProtectedArea->polygon_data) : null;
 
         return view('pages.mpa-country', [
             'country' => $country,
