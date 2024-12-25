@@ -49,7 +49,7 @@ class Countries extends Model
             AquacultureProduction::create([
                 'country_code' => $country->country_code,
                 'country_name' => $country->country_name,
-                'aquaculture_production_2020' => null, // Nilai default atau nilai yang Anda tentukan
+                'aquaculture_production_2020' => null, // Nilai default atau nilai yang ditentukan
                 'aquaculture_production_2021' => null, 
                 'aquaculture_production_2022' => null, 
             ]);
@@ -76,6 +76,12 @@ class Countries extends Model
                 'total_fisheries_production_2020' => null, 
                 'total_fisheries_production_2021' => null, 
                 'total_fisherie_production_2022' => null, 
+            ]);
+
+            Maps::create([
+                'country_code' => $country->country_code,
+                'country_name' => $country->country_name,
+                'geojson' => null, 
             ]);
         });
     }
