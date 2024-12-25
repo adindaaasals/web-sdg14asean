@@ -15,6 +15,9 @@ use Filament\Forms\Components\NumberInput;
 use Filament\Forms\Components\Grid;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Support\Facades\Storage;
+
 
 class CountriesResource extends Resource
 {
@@ -30,64 +33,14 @@ class CountriesResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('country_name')->required(),
                 Forms\Components\TextInput::make('country_code')->required(),
-
-                // Bagian untuk meng-upload atau mengedit data GeoJSON
-                // Forms\Components\FileUpload::make('geojson')
-                //     ->directory('geojsons') // Tempat penyimpanan file GeoJSON
-                //     ->label('Upload GeoJSON')
-                //     ->afterStateUpdated(function (callable $set, $state) {
-                //         if ($state) {
-                //             $geojson = file_get_contents($state);
-                //             // Simpan atau perbarui data GeoJSON di tabel maps
-                //             $country = Countries::find($set('country_id'));  // Get the country by ID
-                //             $country->map()->updateOrCreate(
-                //                 ['country_id' => $country->id],
-                //                 ['geojson' => $geojson]
-                //             );
-                //         }
-                //     }),
-
-                // Menambahkan indikator yang terkait (contoh untuk aquaculture production)
-            //     Forms\Components\Repeater::make('aquacultureProductions')
-            //         ->relationship('aquacultureProductions') // Relasi dengan model AquacultureProduction
-            //         ->schema([
-            //             Forms\Components\TextInput::make('aquaculture_production_2020')->label('Aquaculture Production in 2020')->numeric(),
-            //             Forms\Components\TextInput::make('aquaculture_production_2021')->label('Aquaculture Production in 2021')->numeric(),
-            //             Forms\Components\TextInput::make('aquaculture_production_2022')->label('Aquaculture Production in 2022')->numeric(),
-            //         ])
-            //         ->columns(3)
-            //         ->defaultItems(1),                    
-
-            //     // Menambahkan indikator yang terkait (contoh untuk aquaculture production)
-            //     Forms\Components\Repeater::make('captureFisheriesProductions')
-            //         ->relationship('captureFisheriesProductions') // Relasi dengan model AquacultureProduction
-            //         ->schema([
-            //             Forms\Components\TextInput::make('capture_fisheries_production_2020')->label('Capture Fisheries Production in 2020')->numeric(),
-            //             Forms\Components\TextInput::make('capture_fisheries_production_2021')->label('Capture Fisheries Production in 2021')->numeric(),
-            //             Forms\Components\TextInput::make('capture_fisheries_production_2022')->label('Capture Fisheries Production in 2022')->numeric(),
-            //         ])
-            //         ->columns(3)
-            //         ->defaultItems(1),
-
-            //     Forms\Components\Repeater::make('totalFisheriesProductions')
-            //     ->relationship('totalFisheriesProductions') // Relasi dengan model AquacultureProduction
-            //     ->schema([
-            //         Forms\Components\TextInput::make('total_fisheries_production_2020')->label('Total Fisheries Production in 2020')->numeric(),
-            //         Forms\Components\TextInput::make('total_fisheries_production_2021')->label('Total Fisheries Production in 2021')->numeric(),
-            //         Forms\Components\TextInput::make('total_fisheries_production_2022')->label('Total Fisheries Production in 2022')->numeric(),
-            //     ])
-            //     ->columns(3)
-            //     ->defaultItems(1),
-
-            //     Forms\Components\Repeater::make('marineProtectedAreas')
-            //     ->relationship('marineProtectedAreas') // Relasi dengan model AquacultureProduction
-            //     ->schema([
-            //         Forms\Components\TextInput::make('marine_protected_areas_2020')->label('Marine Protected Areas in 2020')->numeric(),
-            //         Forms\Components\TextInput::make('marine_protected_areas_2021')->label('Marine Protected Areas in 2021')->numeric(),
-            //         Forms\Components\TextInput::make('marine_protected_areas_2022')->label('Marine Protected Areas in 2022')->numeric(),
-            //     ])
-            //     ->columns(3)
-            //     ->defaultItems(1),
+                
+                //Upload Image country_flag
+                Forms\Components\FileUpload::make('country_flag')
+                    ->label('Upload Country Flag')
+                    ->directory('country_flags') // Tempat penyimpanan file
+                    ->acceptedFileTypes(['image/*']) // Hanya izinkan file gambar
+                    ->rules(['max:2048'])
+                    ->maxSize(2048), // Ukuran file maksimum (2 MB)
          ]);
     }
 
@@ -97,6 +50,14 @@ class CountriesResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('country_name'),
                 Tables\Columns\TextColumn::make('country_code'),
+
+                // Menampilkan url data gambar bendera negara
+                Tables\Columns\ImageColumn::make('country_flag')
+                    ->label('Country Flag')
+                    ->url(fn ($record) => Storage::url($record->country_flag))
+                    ->width('50px')
+                    ->height('50px'),
+
 
                 // Menampilkan data indikator (misalnya aquaculture production) di tabel
                 Tables\Columns\TextColumn::make('aquacultureProductions.aquaculture_production_2020')->label('AP-2020'),

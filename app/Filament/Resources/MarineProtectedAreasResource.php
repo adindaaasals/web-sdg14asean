@@ -88,8 +88,14 @@ class MarineProtectedAreasResource extends Resource
     {
         return [
             'index' => Pages\ListMarineProtectedAreas::route('/'),
-            'create' => Pages\CreateMarineProtectedAreas::route('/create'),
+            // 'create' => Pages\CreateMarineProtectedAreas::route('/create'),
             'edit' => Pages\EditMarineProtectedAreas::route('/{record}/edit'),
         ];
+    }
+
+    //Hide create button
+    public static function canCreate(): bool
+    {
+        return false;
     }
 }

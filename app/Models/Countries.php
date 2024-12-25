@@ -9,7 +9,7 @@ class Countries extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['country_code', 'country_name'];
+    protected $fillable = ['country_code', 'country_name', 'country_flag'];
 
     // Relasi dengan model AquacultureProduction
     public function aquacultureProductions()
