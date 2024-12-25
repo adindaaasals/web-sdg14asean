@@ -81,7 +81,7 @@ class CountriesResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

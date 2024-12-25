@@ -70,4 +70,10 @@ class AquacultureProductionResource extends Resource
             'edit' => Pages\EditAquacultureProduction::route('/{record}/edit'),
         ];
     }
+
+        //Hide create button
+        public static function canCreate(): bool
+        {
+            return false;
+        }
 }

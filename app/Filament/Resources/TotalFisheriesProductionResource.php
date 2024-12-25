@@ -70,4 +70,10 @@ class TotalFisheriesProductionResource extends Resource
             'edit' => Pages\EditTotalFisheriesProduction::route('/{record}/edit'),
         ];
     }
+
+    //Hide create button
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 }

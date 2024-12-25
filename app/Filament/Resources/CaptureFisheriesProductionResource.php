@@ -70,4 +70,10 @@ class CaptureFisheriesProductionResource extends Resource
             'edit' => Pages\EditCaptureFisheriesProduction::route('/{record}/edit'),
         ];
     }
+
+    //Hide create button
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 }

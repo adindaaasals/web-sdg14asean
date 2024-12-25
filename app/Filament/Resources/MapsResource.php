@@ -67,4 +67,10 @@ class MapsResource extends Resource
             'edit' => Pages\EditMaps::route('/{record}/edit'),
         ];
     }
+
+    //Hide create button
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 }
