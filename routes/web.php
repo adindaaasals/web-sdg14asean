@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\CaptureFisheriesProductionController;
 use App\Http\Controllers\Api\MarineProtectedAreasController;
 use App\Http\Controllers\Api\TotalFisheriesProductionController;
 use App\Http\Controllers\MapController;
-use App\Http\Controllers\GeojsonController;
+use App\Http\Controllers\CountryReportController;
 use App\Models\AquacultureProduction;
 use App\Models\CaptureFisheriesProduction;
 use App\Models\MarineProtectedAreas;
@@ -46,9 +46,11 @@ Route::prefix('api')->group(function () {
 });
 
 // Halaman daftar country report
-Route::get('/report', function () {
-    return view('pages.report'); // report.php untuk daftar negara
-})->name('pages.report');
+// Route::get('/report', function () {
+//     return view('pages.report'); // report.php untuk daftar negara
+// })->name('pages.report');
+
+Route::get('/report', [CountryReportController::class, 'index'])->name('pages.report');
 
 // Halaman detail report untuk tiap country
 Route::get('/report/{country}', function ($country_name) {
