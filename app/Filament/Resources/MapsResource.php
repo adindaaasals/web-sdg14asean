@@ -35,9 +35,9 @@ class MapsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_name'),
-                Tables\Columns\TextColumn::make('country_code'),
-                Tables\Columns\TextColumn::make('geojson'),
+                Tables\Columns\TextColumn::make('country_name')->label('Country Code'),
+                Tables\Columns\TextColumn::make('country_code')->label('Country Code'),
+                Tables\Columns\TextColumn::make('geojson')->label('Data Spasial Negara'),
             ])
             ->filters([
                 //

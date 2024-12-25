@@ -48,8 +48,8 @@ class CountriesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_name'),
-                Tables\Columns\TextColumn::make('country_code'),
+                Tables\Columns\TextColumn::make('country_name')->label('Country Name'),
+                Tables\Columns\TextColumn::make('country_code')->label('Country Code'),
 
                 // Menampilkan url data gambar bendera negara
                 Tables\Columns\ImageColumn::make('country_flag')

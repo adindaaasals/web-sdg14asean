@@ -36,7 +36,6 @@ class AquacultureProductionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_code')->label('Country Code'),
                 Tables\Columns\TextColumn::make('country_name')->label('Country Name'),
                 Tables\Columns\TextColumn::make('aquaculture_production_2020')->label('AP-2020'),
                 Tables\Columns\TextColumn::make('aquaculture_production_2021')->label('AP-2021'),
