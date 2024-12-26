@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             currentIndicator = { apiUrlBase, method }; // Simpan indikator aktif
             updateIndicatorTitle(this); // Perbarui judul indikator
             updateLegend(method);  // Update the legend according to the selected method
+            updateColorDescription(method);
             fetchDataAndUpdateMap(apiUrlBase, year, method); // Muat data dan perbarui peta
         });
     });
@@ -333,12 +334,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Panggil updateLegend setiap kali tombol diklik
     document.querySelectorAll('button[data-api-url]').forEach(button => {
         button.addEventListener('click', function () {
             const method = this.getAttribute('data-method');
             updateLegend(method); // Perbarui keterangan warna
-            updatecolordesc(method); // Perbarui deskripsi warna
+            updateColorDescription(method); // Perbarui deskripsi warna
         });
     });
 
