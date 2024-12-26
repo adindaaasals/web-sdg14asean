@@ -338,6 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener('click', function () {
             const method = this.getAttribute('data-method');
             updateLegend(method); // Perbarui keterangan warna
+            updatecolordesc(method); // Perbarui deskripsi warna
         });
     });
 
