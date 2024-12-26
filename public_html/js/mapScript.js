@@ -223,49 +223,116 @@ document.addEventListener("DOMContentLoaded", function () {
         const legend = document.getElementById("legend");
         if (method === "linear") {
             legend.innerHTML = `
-                <h3 class="text-[8px] md:text-sm font-bold mb-2">Color Legend (Linear Interval)</h3>
+                <h3 class="text-[8px] md:text-sm font-bold mb-2">Linear Interval</h3>
                 <ul class="list-none">
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #ffffcc;"></span> Very Low
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #ffffcc;"></span>
+                        <span class="text-[8px] md:text-sm">Very Low</span>
                     </li>
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #a1dab4;"></span> Low
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #a1dab4;"></span>
+                        <span class="text-[8px] md:text-sm">Low</span>
                     </li>
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #41b6c4;"></span> Medium
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #41b6c4;"></span>
+                        <span class="text-[8px] md:text-sm">Medium</span>
                     </li>
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #2c7fb8;"></span> High
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #2c7fb8;"></span>
+                        <span class="text-[8px] md:text-sm">High</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #253494;"></span> Very High
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #253494;"></span>
+                        <span class="text-[8px] md:text-sm">Very High</span>
                     </li>
                 </ul>
             `;
         } else if (method === "stddev") {
             legend.innerHTML = `
-                <h3 class="text-[8px] lg:text-sm font-bold mb-2">Color Legend (Standard Deviation)</h3>
+                <h3 class="text-[8px] md:text-sm font-bold mb-2">Standard Deviation</h3>
                 <ul class="list-none">
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #ffffcc;"></span> Very Below Average
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #ffffcc;"></span>
+                        <span class="text-[8px] md:text-sm">Very Below Average</span>
                     </li>
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #a1dab4;"></span> Below Average
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #a1dab4;"></span>
+                        <span class="text-[8px] md:text-sm">Below Average</span>
                     </li>
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #41b6c4;"></span> Average
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #41b6c4;"></span>
+                        <span class="text-[8px] md:text-sm">Average</span>
                     </li>
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #2c7fb8;"></span> Above Average
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #2c7fb8;"></span>
+                        <span class="text-[8px] md:text-sm">Above Average</span>
                     </li>
                     <li class="flex items-center">
-                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #253494;"></span> Very Above Average
+                        <span class="inline-block w-4 h-4 mr-2" style="background-color: #253494;"></span>
+                        <span class="text-[8px] md:text-sm">Very Above Average</span>
                     </li>
                 </ul>
             `;
         }
     }
     
+    function updateColorDescription(method) {
+        const colordesc = document.getElementById("colordesc");
+        if (method === "linear") {
+            colordesc.innerHTML = `
+                <h3 class="text-[10px] md:text-xs lg:text-base font-bold mb-2 px-10">Color Description</h3>
+                <ul class="list-none px-10">
+                    <li class="flex items-center mb-1">
+                        <span class="inline-block mr-2 w-4 h-4 md:w-8 md:h-8" style="background-color: #ffffcc;"></span>
+                        <span class="text-[8px] lg:text-smtext-justify">The data value is very low, indicating a condition that requires special attention for management.</span>
+                    </li>
+                    <li class="flex items-center mb-1">
+                        <span class="inline-block mr-2 w-4 h-4 md:w-8 md:h-8" style="background-color: #a1dab4;"></span>
+                        <span class="text-[8px] lg:text-sm text-justify">The data value is low, still below average but not too significant.</span>
+                    </li>
+                    <li class="flex items-center mb-1">
+                        <span class="inline-block mr-2 w-4 h-4 md:w-8 md:h-8" style="background-color: #41b6c4;"></span>
+                        <span class="text-[8px] lg:text-sm text-justify">The data value is moderate, indicating an average level of achievement or a fairly stable level of sustainability.</span>
+                    </li>
+                    <li class="flex items-center mb-1">
+                        <span class="inline-block mr-2 w-4 h-4 md:w-8 md:h-8" style="background-color: #2c7fb8;"></span>
+                        <span class="text-[8px] lg:text-sm text-justify">The data value is high, indicating sustainability or achievement in certain indicators.</span>
+                    </li>
+                    <li class="flex items-center pb-10">
+                        <span class="inline-block mr-2 w-4 h-4 md:w-8 md:h-8" style="background-color: #253494;"></span>
+                        <span class="text-[8px] lg:text-sm text-justify">The data value is very high, reflecting extraordinary success in related indicators.</span>
+                    </li>
+                </ul>
+            `;
+        } else if (method === "stddev") {
+            colordesc.innerHTML = `
+                <h3 class="text-[10px] md:text-xs lg:text-base font-bold mb-2 px-10">Color Description</h3>
+                <ul class="list-none px-10 mb-10">
+                <li class="flex items-center mb-1">
+                    <span class="inline-block w-4 h-4 md:w-8 md:h-8 mr-2" style="background-color: #ffffcc;"></span>
+                    <span class="text-[8px] lg:text-sm text-justify">The data value is very far below average, indicating significant problems.</span>
+                </li>
+                <li class="flex items-center mb-1">
+                    <span class="inline-block w-4 h-4 md:w-8 md:h-8 mr-2" style="background-color: #a1dab4;"></span>
+                    <span class="text-[8px] lg:text-sm text-justify">The data value is below average, requiring improvements in management or sustainability.</span>
+                </li>
+                <li class="flex items-center mb-1">
+                    <span class="inline-block w-4 h-4 md:w-8 md:h-8 mr-2" style="background-color: #41b6c4;"></span>
+                    <span class="text-[8px] lg:text-sm text-justify">The data value is at the average level, showing stable performance but still has room for improvement.</span>
+                </li>
+                <li class="flex items-center mb-1">
+                    <span class="inline-block w-4 h-4 md:w-8 md:h-8 mr-2" style="background-color: #2c7fb8;"></span>
+                    <span class="text-[8px] lg:text-sm text-justify">The data value is above average, reflecting good achievements in managing certain indicators.</span>
+                </li>
+                <li class="flex items-center">
+                    <span class="inline-block w-4 h-4 md:w-8 md:h-8 mr-2" style="background-color: #253494;"></span>
+                    <span class="text-[8px] lg:text-sm text-justify">The data value is far above average, reflecting extraordinary or optimal success.</span>
+                </li>
+            </ul>
+            `;
+        }
+    }
+
     // Panggil updateLegend setiap kali tombol diklik
     document.querySelectorAll('button[data-api-url]').forEach(button => {
         button.addEventListener('click', function () {

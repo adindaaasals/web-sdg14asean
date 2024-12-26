@@ -102,6 +102,10 @@
     
 </div>
 
+<div id="colordesc" class=" mb-10">
+    
+</div>
+
 {{-- Tambahkan dependensi Leaflet --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css" />
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
