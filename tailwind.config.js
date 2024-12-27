@@ -13,8 +13,12 @@ export default {
         'h-4',
         'w-4',
         'inline-block',
-        'md:w-8',
-        'md:h-8'
+        'lg:w-8',
+        'lg:h-8',
+        'bottom-4',
+        '-bottom-14',
+        'pl-10',
+        'lg:pl-20'
     ],
     theme: {
         extend: {
