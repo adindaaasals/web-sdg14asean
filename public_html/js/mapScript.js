@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <ul class="list-none px-10">
                     <li class="flex items-center mb-1">
                         <span class="inline-block mr-2 w-4 h-4 md:w-8 md:h-8" style="background-color: #ffffcc;"></span>
-                        <span class="text-[8px] lg:text-smtext-justify">The data value is very low, indicating a condition that requires special attention for management.</span>
+                        <span class="text-[8px] lg:text-sm text-justify">The data value is very low, indicating a condition that requires special attention for management.</span>
                     </li>
                     <li class="flex items-center mb-1">
                         <span class="inline-block mr-2 w-4 h-4 md:w-8 md:h-8" style="background-color: #a1dab4;"></span>

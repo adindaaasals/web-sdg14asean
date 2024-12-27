@@ -9,6 +9,13 @@ export default {
         './resources/**/*.js',
         './resources/**/*.vue',
     ],
+     safelist: [
+        'h-4',
+        'w-4',
+        'inline-block',
+        'md:w-8',
+        'md:h-8'
+    ],
     theme: {
         extend: {
             fontFamily: {
