@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h3 class="text-[10px] md:text-sm lg:text-base font-bold mb-2 px-10">Color Description</h3>
                 <ul class="list-none px-10 mb-10">
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 lg:h-8 lg:w-8 mr-2" style="background-color: #ffffcc;"></span>
+                        <span class="inline-block mr-2 w-4 h-4 lg:w-8 lg:h-8" style="background-color: #ffffcc;"></span>
                         <span class="text-[8px] md:text-xs lg:text-sm text-justify">The data value is very far below average, indicating significant problems.</span>
                     </li>
                     <li class="flex items-center mb-1">
