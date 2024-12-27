@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="text-center mt-12 font-bold text-base md:text-xl lg:text-2xl">
+<div class="text-center mt-12 font-bold text-base md:text-lg lg:text-2xl">
     <h1>ASEAN MAPS</h1>
 </div>
 
@@ -69,7 +69,7 @@
 </div>
 
 
-<div id="indicatorTitle" class="mt-6 pl-20 text-lg font-bold">
+<div id="indicatorTitle" class="mt-6 pl-10 lg:pl-20 text-sm md:text-base lg:text-lg font-bold">
     
 </div>
 
@@ -78,9 +78,9 @@
     <ul id="statisticsList" class="list-disc pl-5"></ul>
 </div> --}}
 
-<div class="flex items-center text-center space-x-4 mt-2 pl-20">
-    <label for="yearSelect" class="text-lg font-bold text-black">Select Years:</label>
-    <select id="yearSelect" class="block p-2 border border-gray-300 rounded">
+<div class="flex items-center text-center space-x-4 mt-2 pl-10 lg:pl-20">
+    <label for="yearSelect" class="text-xs md:text-sm lg:text-base font-bold text-black">Select Years:</label>
+    <select id="yearSelect" class="block p-2 text-xs md:text-sm lg:text-base border border-gray-300 rounded">
         <option value="2020">2020</option>
         <option value="2021">2021</option>
         <option value="2022">2022</option>
@@ -98,7 +98,7 @@
     </div>
 </div>
 
-<div id="legend" class="block md:absolute md:bottom-8 lg:bottom-4 md:right-0 bg-white px-4 pb-4 md:p-4 shadow-lg text-xs md:text-sm lg:text-base rounded-md z-10">
+<div id="legend" class="absolute -bottom-14 lg:bottom-4 right-0 bg-white p-4 shadow-lg text-xs md:text-sm lg:text-base rounded-md z-10">
     
 </div>
 
