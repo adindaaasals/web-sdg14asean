@@ -69,7 +69,7 @@
 </div>
 
 
-<div id="indicatorTitle" class="mt-6 pl-10 lg:pl-20 text-sm md:text-base lg:text-lg font-bold">
+<div id="indicatorTitle" class="mt-6 pl-10 xl:pl-20 text-sm md:text-base lg:text-lg font-bold">
     
 </div>
 

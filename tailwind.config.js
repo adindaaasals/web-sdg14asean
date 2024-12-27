@@ -19,6 +19,11 @@ export default {
         '-bottom-14',
         'pl-10',
         'lg:pl-20'
+        'text-[8px]',
+        'md:text-xs',
+        'lg:text-sm',
+        '#ffffcc',
+        'mr-2'
     ],
     theme: {
         extend: {
