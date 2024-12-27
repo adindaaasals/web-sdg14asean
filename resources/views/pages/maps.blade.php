@@ -78,7 +78,7 @@
     <ul id="statisticsList" class="list-disc pl-5"></ul>
 </div> --}}
 
-<div class="flex items-center text-center space-x-4 mt-2 pl-10 lg:pl-20">
+<div class="flex items-center text-center space-x-4 mt-2 pl-10 xl:pl-20">
     <label for="yearSelect" class="text-xs md:text-sm lg:text-base font-bold text-black">Select Years:</label>
     <select id="yearSelect" class="block p-2 text-xs md:text-sm lg:text-base border border-gray-300 rounded">
         <option value="2020">2020</option>

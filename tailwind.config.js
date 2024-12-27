@@ -18,7 +18,7 @@ export default {
         'bottom-4',
         '-bottom-14',
         'pl-10',
-        'lg:pl-20'
+        'lg:pl-20',
         'text-[8px]',
         'md:text-xs',
         'lg:text-sm',
