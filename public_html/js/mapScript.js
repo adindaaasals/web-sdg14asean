@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span class="text-[8px] md:text-xs lg:text-sm text-justify">The data value is at the average level, showing stable performance but still has room for improvement.</span>
                     </li>
                     <li class="flex items-center mb-1">
-                        <span class="inline-block w-4 h-4 lg:h-8 lg:w-8 mr-2" style="background-color: #2cff8b;"></span>
+                        <span class="inline-block w-4 h-4 lg:h-8 lg:w-8 mr-2" style="background-color: #2c7fb8;"></span>
                         <span class="text-[8px] md:text-xs lg:text-sm text-justify">The data value is above average, reflecting good achievements in managing certain indicators.</span>
                     </li>
                     <li class="flex items-center">
