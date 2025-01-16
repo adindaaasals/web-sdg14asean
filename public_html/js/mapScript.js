@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.table({
         "Minimum": min,
         "Maximum": max,
-        "Range": range,
+        // "Range": range,
         "Interval": intervals
     });
     

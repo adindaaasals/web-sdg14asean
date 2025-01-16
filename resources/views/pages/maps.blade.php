@@ -94,7 +94,7 @@
         <p>Source of data: The World Bank Group</p>
     </div>
     <div id="statistics" class="absolute top-4 left-10 bg-white p-4 shadow-lg rounded-md z-10">
-        Loading statistics...
+        Loading maps...
     </div>
 </div>
 
