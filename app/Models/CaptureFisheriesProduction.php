@@ -23,8 +23,7 @@ class CaptureFisheriesProduction extends Model
      */
     
     protected $fillable = [
-        'country_code',
-        'country_name',
+        'country_id',
         'capture_fisheries_production_2020',
         'capture_fisheries_production_2021',
         'capture_fisheries_production_2022',
@@ -33,6 +32,6 @@ class CaptureFisheriesProduction extends Model
     // Relasi dengan model Country
     public function country()
     {
-        return $this->belongsTo(Countries::class, 'country_code', 'country_code');
+        return $this->belongsTo(Countries::class, 'country_id', 'id');
     }
 }

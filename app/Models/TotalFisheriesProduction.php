@@ -23,8 +23,7 @@ class TotalFisheriesProduction extends Model
      */
     
     protected $fillable = [
-        'country_code',
-        'country_name',
+        'country_id',
         'total_fisheries_production_2020',
         'total_fisheries_production_2021',
         'total_fisheries_production_2022',
@@ -33,6 +32,6 @@ class TotalFisheriesProduction extends Model
     // Relasi dengan model Country
     public function country()
     {
-        return $this->belongsTo(Countries::class, 'country_code', 'country_code');
+        return $this->belongsTo(Countries::class, 'country_id', 'id');
     }
 }

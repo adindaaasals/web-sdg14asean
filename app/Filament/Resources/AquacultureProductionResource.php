@@ -24,8 +24,6 @@ class AquacultureProductionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('country_code')->label('Country Code')->required(),
-                Forms\Components\TextInput::make('country_name')->label('Country Name')->required(),
                 Forms\Components\TextInput::make('aquaculture_production_2020')->label('Aquaculture Production in 2020')->numeric(),
                 Forms\Components\TextInput::make('aquaculture_production_2021')->label('Aquaculture Production in 2021')->numeric(),
                 Forms\Components\TextInput::make('aquaculture_production_2022')->label('Aquaculture Production in 2022')->numeric()
@@ -36,7 +34,7 @@ class AquacultureProductionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_name')->label('Country Name'),
+                Tables\Columns\TextColumn::make('country.country_name')->label('Country Name'),
                 Tables\Columns\TextColumn::make('aquaculture_production_2020')->label('AP-2020'),
                 Tables\Columns\TextColumn::make('aquaculture_production_2021')->label('AP-2021'),
                 Tables\Columns\TextColumn::make('aquaculture_production_2022')->label('AP-2022'),
@@ -46,7 +44,7 @@ class AquacultureProductionResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

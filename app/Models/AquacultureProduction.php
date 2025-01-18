@@ -23,8 +23,7 @@ class AquacultureProduction extends Model
      */
 
     protected $fillable = [
-        'country_code',
-        'country_name',
+        'country_id',
         'aquaculture_production_2020',
         'aquaculture_production_2021',
         'aquaculture_production_2022',
@@ -33,6 +32,6 @@ class AquacultureProduction extends Model
     // Relasi dengan model Country
     public function country()
     {
-        return $this->belongsTo(Countries::class, 'country_code', 'country_code');
+        return $this->belongsTo(Countries::class, 'country_id', 'id');
     }
 }

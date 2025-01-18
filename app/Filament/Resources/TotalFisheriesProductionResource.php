@@ -24,8 +24,6 @@ class TotalFisheriesProductionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('country_code')->label('Country Code')->required(),
-                Forms\Components\TextInput::make('country_name')->label('Country Name')->required(),
                 Forms\Components\TextInput::make('total_fisheries_production_2020')->label('Total Fisheries Production in 2020')->numeric(),
                 Forms\Components\TextInput::make('total_fisheries_production_2021')->label('Total Fisheries Production in 2021')->numeric(),
                 Forms\Components\TextInput::make('total_fisheries_production_2022')->label('Total Fisheries Production in 2022')->numeric()
@@ -36,7 +34,7 @@ class TotalFisheriesProductionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_name')->label('Country Name'),
+                Tables\Columns\TextColumn::make('country.country_name')->label('Country Name'),
                 Tables\Columns\TextColumn::make('total_fisheries_production_2020')->label('TFP-2020'),
                 Tables\Columns\TextColumn::make('total_fisheries_production_2021')->label('TFP-2021'),
                 Tables\Columns\TextColumn::make('total_fisheries_production_2022')->label('TFP-2022'),

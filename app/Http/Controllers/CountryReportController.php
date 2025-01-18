@@ -13,7 +13,7 @@ class CountryReportController extends Controller
     public function index()
     {
         // Ambil data negara dari database
-        $allCountries = DB::table('countries')->select('country_name', 'country_flag')->get();
+        $allCountries = DB::table('countries')->select('id', 'country_name', 'country_flag')->get();
 
         // Debug data untuk memastikan data ada
         // dd($allCountries); // Cek apakah data benar-benar ada

@@ -84,19 +84,19 @@
                 <tr>
                     <td class="border-[3px] border-gray-300 p-2">2020</td>
                     <td class="border-[3px] border-gray-300 p-2">
-                        {{ $data->marine_protected_areas_2020 !== null ? number_format($data->marine_protected_areas_2020 * 100, 1) . '%' : "Data Unavailable" }}
+                        {{ $data->marine_protected_areas_2020 !== null ? number_format($data->marine_protected_areas_2020, 1) . '%' : "Data Unavailable" }}
                     </td>
                 </tr>
                 <tr>
                     <td class="border-[3px] border-gray-300 p-2">2021</td>
                     <td class="border-b-[3px] border-gray-300 p-2">
-                        {{ $data->marine_protected_areas_2021 !== null ? number_format($data->marine_protected_areas_2021 * 100, 1) . '%' : "Data Unavailable" }}
+                        {{ $data->marine_protected_areas_2021 !== null ? number_format($data->marine_protected_areas_2021, 1) . '%' : "Data Unavailable" }}
                     </td>
                 </tr>
                 <tr>
                     <td class="border-[3px] border-gray-300 p-2">2022</td>
                     <td class="border-b-[3px] border-gray-300 p-2">
-                        {{ $data->marine_protected_areas_2022 !== null ? number_format($data->marine_protected_areas_2022 * 100, 1) . '%' : "Data Unavailable" }}
+                        {{ $data->marine_protected_areas_2022 !== null ? number_format($data->marine_protected_areas_2022, 1) . '%' : "Data Unavailable" }}
                     </td>
                 </tr>
                 @endforeach
@@ -141,9 +141,9 @@
     <p>Source of data: The World Bank Group</p>
 </div>
 
-@if ($marineProtectedData->contains(function ($data) { return $data->polygon_data !== null; }))
+@if ($marineProtectedData->contains(function ($data) { return $data->marine_protected_areas_2022 !== null; }))
 <div class="text-center">
-    <button onclick="window.location='{{ route('mpa.country', ['country' => $country]) }}'" class="bg-[#0F6FFF] mb-7 p-4 text-xs md:text-sm lg:text-base rounded-xl text-white">
+    <button onclick="window.location='{{ route('mpa.country', ['country' => $id]) }}'" class="bg-[#0F6FFF] mb-7 p-4 text-xs md:text-sm lg:text-base rounded-xl text-white">
         View Marine Protected Area
     </button>
 </div>

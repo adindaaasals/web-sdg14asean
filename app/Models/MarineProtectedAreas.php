@@ -23,8 +23,7 @@ class MarineProtectedAreas extends Model
      */
     
     protected $fillable = [
-        'country_code',
-        'country_name',
+        'country_id',
         'marine_protected_areas_2020',
         'marine_protected_areas_2021',
         'marine_protected_areas_2022',
@@ -33,6 +32,6 @@ class MarineProtectedAreas extends Model
     // Relasi dengan model Country
     public function country()
     {
-        return $this->belongsTo(Countries::class, 'country_code', 'country_code');
+        return $this->belongsTo(Countries::class, 'country_id', 'id');
     }
 }

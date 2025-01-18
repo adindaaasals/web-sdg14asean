@@ -41,6 +41,8 @@ class CountriesResource extends Resource
                     ->acceptedFileTypes(['image/*']) // Hanya izinkan file gambar
                     ->rules(['max:2048'])
                     ->maxSize(2048), // Ukuran file maksimum (2 MB)
+
+                    Forms\Components\TextInput::make('geojson')->required(),
          ]);
     }
 
@@ -91,47 +93,47 @@ class CountriesResource extends Resource
             ]);
     }
 
-    public static function saveCountryWithIndicators($data)
-    {
-        // Menyimpan data negara
-        $country = Countries::create([
-            'country_name' => $data['country_name'],
-            'country_code' => $data['country_code'],
-        ]);
+    // public static function saveCountryWithIndicators($data)
+    // {
+    //     // Menyimpan data negara
+    //     $country = Countries::create([
+    //         'country_name' => $data['country_name'],
+    //         'country_code' => $data['country_code'],
+    //     ]);
 
-        // Menyimpan indikator terkait (contoh aquaculture production)
-        foreach ($data['aquacultureProductions'] as $production) {
-            $country->aquacultureProductions()->create([
-                'aquaculture_production_2020' => $production['aquaculture_production_2020'],
-                'aquaculture_production_2021' => $production['aquaculture_production_2021'],
-                'aquaculture_production_2022' => $production['aquaculture_production_2022'],
-            ]);
-        }
+    //     // Menyimpan indikator terkait (contoh aquaculture production)
+    //     foreach ($data['aquacultureProductions'] as $production) {
+    //         $country->aquacultureProductions()->create([
+    //             'aquaculture_production_2020' => $production['aquaculture_production_2020'],
+    //             'aquaculture_production_2021' => $production['aquaculture_production_2021'],
+    //             'aquaculture_production_2022' => $production['aquaculture_production_2022'],
+    //         ]);
+    //     }
 
-        foreach ($data['totalFisheriesProductions'] as $production) {
-            $country->totalFisheriesProductions()->create([
-                'total_fisheries_production_2020' => $production['total_fisheries_production_2020'],
-                'total_fisheries_production_2021' => $production['total_fisheries_production_2021'],
-                'total_fisheries_production_2022' => $production['total_fisheries_production_2022'],
-            ]);
-        }
+    //     foreach ($data['totalFisheriesProductions'] as $production) {
+    //         $country->totalFisheriesProductions()->create([
+    //             'total_fisheries_production_2020' => $production['total_fisheries_production_2020'],
+    //             'total_fisheries_production_2021' => $production['total_fisheries_production_2021'],
+    //             'total_fisheries_production_2022' => $production['total_fisheries_production_2022'],
+    //         ]);
+    //     }
 
-        foreach ($data['captureFisheriesProductions'] as $production) {
-            $country->captureFisheriesProductions()->create([
-                'capture_fisheries_production_2020' => $production['capture_fisheries_production_2020'],
-                'capture_fisheries_production_2021' => $production['capture_fisheries_production_2021'],
-                'capture_fisheries_production_2022' => $production['capture_fisheries_production_2022'],
-            ]);
-        }
+    //     foreach ($data['captureFisheriesProductions'] as $production) {
+    //         $country->captureFisheriesProductions()->create([
+    //             'capture_fisheries_production_2020' => $production['capture_fisheries_production_2020'],
+    //             'capture_fisheries_production_2021' => $production['capture_fisheries_production_2021'],
+    //             'capture_fisheries_production_2022' => $production['capture_fisheries_production_2022'],
+    //         ]);
+    //     }
 
-        foreach ($data['marineProtectedAreas'] as $production) {
-            $country->marineProtectedAreas()->create([
-                'marine_protected_areas_2020' => $production['marine_protected_areas_2020'],
-                'marine_protected_areas_2021' => $production['marine_protected_areas_2021'],
-                'marine_protected_areas_2022' => $production['marine_protected_areas_2022'],
-            ]);
-        }
-    }
+    //     foreach ($data['marineProtectedAreas'] as $production) {
+    //         $country->marineProtectedAreas()->create([
+    //             'marine_protected_areas_2020' => $production['marine_protected_areas_2020'],
+    //             'marine_protected_areas_2021' => $production['marine_protected_areas_2021'],
+    //             'marine_protected_areas_2022' => $production['marine_protected_areas_2022'],
+    //         ]);
+    //     }
+    // }
 
 
     public static function getRelations(): array

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CaptureFisheriesProduction;
-use App\Models\Maps; 
+use App\Models\Countries; 
 use Illuminate\Http\Request;
 
 class CaptureFisheriesProductionController extends Controller
@@ -21,10 +21,10 @@ class CaptureFisheriesProductionController extends Controller
         }
 
         // Ambil data dari model CaptureFisheriesProduction berdasarkan tahun
-        $data = CaptureFisheriesProduction::select('country_code', 'country_name', "capture_fisheries_production_{$year} as value")->get();
+        $data = CaptureFisheriesProduction::select('country_id', "capture_fisheries_production_{$year} as value")->get();
 
         // Ambil data GeoJSON dari tabel maps di database
-        $geoJsonData = Maps::select('country_code', 'geojson')->get();
+        $geoJsonData = Countries::select('id', 'country_name', 'geojson')->get();
 
         // Buat array untuk geojson hasil gabungan
         $geoJson = [
@@ -35,12 +35,12 @@ class CaptureFisheriesProductionController extends Controller
         // Gabungkan data produksi dengan data GeoJSON berdasarkan 'country_code'
         foreach ($data as $item) {
             foreach ($geoJsonData as $map) {
-                if ($map->country_code === $item->country_code) {
+                if ($map->id === $item->country_id) {
                     // Gabungkan data indikator dengan geoJSON
                     $geoJson['features'][] = [
                         "type" => "Feature",
                         "properties" => [
-                            "name" => $item->country_name,
+                            "name" => $map->country_name,
                             "value" => $item->value
                         ],
                         "geometry" => json_decode($map->geojson) // Ambil geometry dari tabel maps

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Countries;
 use App\Models\MarineProtectedAreas;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,14 +25,16 @@ class MapController extends Controller
 
     public function showMPA($country)
     {
+        $country_data = Countries::find($country);
+
         // Ambil data dari database berdasarkan country_name
-        $marineProtectedArea = MarineProtectedAreas::where('country_name', $country)->first();
+        $marineProtectedArea = MarineProtectedAreas::where('country_id', $country)->first();
 
         // Ambil path file polygon
-        $polygonPath = $marineProtectedArea ? Storage::url($marineProtectedArea->polygon_data) : null;
+        $polygonPath = $marineProtectedArea ? Storage::url($marineProtectedArea->polygon_data_json) : null;
 
         return view('pages.mpa-country', [
-            'country' => $country,
+            'country' => $country_data->country_name,
             'polygonData' => $polygonPath, // Path file JSON untuk peta
         ]);
     }

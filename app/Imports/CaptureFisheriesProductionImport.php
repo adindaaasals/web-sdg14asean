@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Countries;
 use App\Models\CaptureFisheriesProduction;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -23,35 +24,45 @@ class CaptureFisheriesProductionImport implements ToModel, WithHeadingRow
 
     
     public function model(array $row)
-    {
-
-        // Abaikan baris jika tidak ada country_code
-        if (!isset($row['country_code']) || !in_array($row['country_code'], $this->aseanCountries)) {
-            return null; 
-        }
-
-         // Mengganti koma dengan titik, dan membulatkan angka
-         if (isset($row['2020'])) {
-            $row['2020'] = str_replace(',', '.', $row['2020']); // Ganti koma jadi titik
-            $row['2020'] = round((float)$row['2020']); // Bulatkan angka dan ubah menjadi integer
-        }
-
-        if (isset($row['2021'])) {
-            $row['2021'] = str_replace(',', '.', $row['2021']); // Ganti koma jadi titik
-            $row['2021'] = round((float)$row['2021']); // Bulatkan angka dan ubah menjadi integer
-        }
-
-        if (isset($row['2022'])) {
-            $row['2022'] = str_replace(',', '.', $row['2022']); // Ganti koma jadi titik
-            $row['2022'] = round((float)$row['2022']); // Bulatkan angka dan ubah menjadi integer
-        }
-        
-        return new CaptureFisheriesProduction([
-            'country_code' => $row['country_code'],
-            'country_name' => $row['country_name'],
-            'year_2020'    => $row['2020'] ?? null,
-            'year_2021'    => $row['2021'] ?? null,
-            'year_2022'    => $row['2022'] ?? null,
-        ]);
+{
+    // Abaikan baris jika tidak ada country_code atau country_code tidak termasuk dalam daftar ASEAN
+    if (!isset($row['country_code']) || !in_array($row['country_code'], $this->aseanCountries)) {
+        return null; 
     }
+
+    // Cari country_id berdasarkan country_code
+    $country = Countries::where('country_code', $row['country_code'])->first();
+
+    if (!$country) {
+        return null; // Abaikan jika country_code tidak ditemukan di database
+    }
+
+    // Mengganti koma dengan titik, dan membulatkan angka
+    if (isset($row['2020'])) {
+        $row['2020'] = str_replace(',', '.', $row['2020']); // Ganti koma jadi titik
+        $row['2020'] = round((float)$row['2020']); // Bulatkan angka dan ubah menjadi integer
+    }
+
+    if (isset($row['2021'])) {
+        $row['2021'] = str_replace(',', '.', $row['2021']); // Ganti koma jadi titik
+        $row['2021'] = round((float)$row['2021']); // Bulatkan angka dan ubah menjadi integer
+    }
+
+    if (isset($row['2022'])) {
+        $row['2022'] = str_replace(',', '.', $row['2022']); // Ganti koma jadi titik
+        $row['2022'] = round((float)$row['2022']); // Bulatkan angka dan ubah menjadi integer
+    }
+
+    // Menggunakan updateOrCreate untuk memperbarui atau membuat data
+    CaptureFisheriesProduction::updateOrCreate(
+        ['country_id' => $country->id], // Kondisi pencarian
+        [
+            'capture_fisheries_production_2020' => $row['2020'] ?? null,
+            'capture_fisheries_production_2021' => $row['2021'] ?? null,
+            'capture_fisheries_production_2022' => $row['2022'] ?? null,
+        ]
+    );
+
+    return null; // Tidak perlu mengembalikan model karena data sudah ditangani oleh updateOrCreate
+}
 }

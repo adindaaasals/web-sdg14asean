@@ -40,7 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function fetchDataAndUpdateMap(apiUrlBase, year, method) {
         console.log("fetchDataAndUpdateMap Called!");
         const apiUrl = `${apiUrlBase}?year=${year}`;
-        fetch(apiUrl)
+        fetch(apiUrl, {
+            headers: {
+                'Accept': 'application/json' // Tambahkan header Accept
+            }
+        })
+        
             .then(response => response.json())
             .then(data => {
                 if (window.geoJsonLayer) {

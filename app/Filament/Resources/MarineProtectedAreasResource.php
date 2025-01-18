@@ -26,8 +26,6 @@ class MarineProtectedAreasResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('country_code')->label('Country Code')->required(),
-                Forms\Components\TextInput::make('country_name')->label('Country Name')->required(),
                 Forms\Components\TextInput::make('marine_protected_areas_2020')->label('Marine Protected Areas in 2020')->numeric(),
                 Forms\Components\TextInput::make('marine_protected_areas_2021')->label('Marine Protected Areas in 2020')->numeric(),
                 Forms\Components\TextInput::make('marine_protected_areas_2022')->label('Marine Protected Areas in 2020')->numeric(),
@@ -41,10 +39,10 @@ class MarineProtectedAreasResource extends Resource
                     ->maxSize(204800) // Ukuran file maksimum (160 MB)
                     ->saveUploadedFileUsing(function ($file, $record, callable $set) {
                         $path = FileUploadService::uploadPolygonFile($file);
-                        $set('polygon_data', $path);
+                        $set('polygon_data_json', $path);
                     
                         if ($record) {
-                            $record->polygon_data = $path;
+                            $record->polygon_data_json = $path;
                             $record->save();
                         }
                     
@@ -58,13 +56,13 @@ class MarineProtectedAreasResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_name')->label('Country Name'),
+                Tables\Columns\TextColumn::make('country.country_name')->label('Country Name'),
                 Tables\Columns\TextColumn::make('marine_protected_areas_2020')->label('MPA-2020'),
                 Tables\Columns\TextColumn::make('marine_protected_areas_2021')->label('MPA-2021'),
                 Tables\Columns\TextColumn::make('marine_protected_areas_2022')->label('MPA-2022'),
-                Tables\Columns\TextColumn::make('polygon_data')
+                Tables\Columns\TextColumn::make('polygon_data_json')
                     ->label('Polygon File Path')
-                    ->url(fn ($record) => Storage::url($record->polygon_data)) // Tautan untuk melihat file
+                    ->url(fn ($record) => Storage::url($record->polygon_data_json)) // Tautan untuk melihat file
                     ->openUrlInNewTab(), // Buka tautan di tab baru
             ])
             ->filters([])

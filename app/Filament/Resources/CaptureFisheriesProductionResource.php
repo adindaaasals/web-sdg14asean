@@ -24,8 +24,6 @@ class CaptureFisheriesProductionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('country_code')->label('Country Code')->required(),
-                Forms\Components\TextInput::make('country_name')->label('Country Name')->required(),
                 Forms\Components\TextInput::make('capture_fisheries_production_2020')->label('Capture Fisheries Production in 2020')->numeric(),
                 Forms\Components\TextInput::make('capture_fisheries_production_2021')->label('Capture Fisheries Production in 2021')->numeric(),
                 Forms\Components\TextInput::make('capture_fisheries_production_2022')->label('Capture Fisheries Production in 2022')->numeric()
@@ -36,7 +34,7 @@ class CaptureFisheriesProductionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_name')->label('Country Name'),
+                Tables\Columns\TextColumn::make('country.country_name')->label('Country Name'),
                 Tables\Columns\TextColumn::make('capture_fisheries_production_2020')->label('CFP-2020'),
                 Tables\Columns\TextColumn::make('capture_fisheries_production_2021')->label('CFP-2021'),
                 Tables\Columns\TextColumn::make('capture_fisheries_production_2022')->label('CFP-2022'),

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AquacultureProductionController;
 use App\Http\Controllers\Api\CaptureFisheriesProductionController;
 use App\Http\Controllers\Api\MarineProtectedAreasController;
 use App\Http\Controllers\Api\TotalFisheriesProductionController;
+use App\Models\Countries;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\CountryReportController;
 use App\Models\AquacultureProduction;
@@ -53,16 +54,19 @@ Route::prefix('api')->group(function () {
 Route::get('/report', [CountryReportController::class, 'index'])->name('pages.report');
 
 // Halaman detail report untuk tiap country
-Route::get('/report/{country}', function ($country_name) {
+Route::get('/report/{country}', function ($id) {
     // Ambil data berdasarkan country_name dari tabel indikator
-    $aquacultureData = AquacultureProduction::where('country_name', $country_name)->get();
-    $captureFisheriesData = CaptureFisheriesProduction::where('country_name', $country_name)->get();
-    $marineProtectedData = MarineProtectedAreas::where('country_name', $country_name)->get();
-    $totalFisheriesData = TotalFisheriesProduction::where('country_name', $country_name)->get();
+    $country = Countries::find($id);
+    $aquacultureData = AquacultureProduction::where('country_id', $id)->get();
+    $captureFisheriesData = CaptureFisheriesProduction::where('country_id', $id)->get();
+    $marineProtectedData = MarineProtectedAreas::where('country_id', $id)->get();
+    $totalFisheriesData = TotalFisheriesProduction::where('country_id', $id)->get();
+    // dd($marineProtectedData);
 
     // Kirim data ke view, termasuk country_name
     return view('pages.report-country', [
-        'country' => $country_name, // Kirim country_name yang diterima dari URL
+        'country' => $country->country_name, // Kirim country_name yang diterima dari URL
+        'id' => $country->id,
         'aquacultureData' => $aquacultureData,
         'captureFisheriesData' => $captureFisheriesData,
         'marineProtectedData' => $marineProtectedData,
