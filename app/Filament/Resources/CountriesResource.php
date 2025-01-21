@@ -33,6 +33,7 @@ class CountriesResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('country_name')->required(),
                 Forms\Components\TextInput::make('country_code')->required(),
+                Forms\Components\TextInput::make('geojson')->required(),
                 
                 //Upload Image country_flag
                 Forms\Components\FileUpload::make('country_flag')
@@ -41,8 +42,6 @@ class CountriesResource extends Resource
                     ->acceptedFileTypes(['image/*']) // Hanya izinkan file gambar
                     ->rules(['max:2048'])
                     ->maxSize(2048), // Ukuran file maksimum (2 MB)
-
-                    Forms\Components\TextInput::make('geojson')->required(),
          ]);
     }
 
@@ -60,7 +59,6 @@ class CountriesResource extends Resource
                     ->width('50px')
                     ->height('50px'),
 
-
                 // Menampilkan data indikator (misalnya aquaculture production) di tabel
                 Tables\Columns\TextColumn::make('aquacultureProductions.aquaculture_production_2020')->label('AP-2020'),
                 Tables\Columns\TextColumn::make('aquacultureProductions.aquaculture_production_2021')->label('AP-2021'),
@@ -77,7 +75,8 @@ class CountriesResource extends Resource
                 Tables\Columns\TextColumn::make('marineProtectedAreas.marine_protected_areas_2020')->label('MPA-2020'),
                 Tables\Columns\TextColumn::make('marineProtectedAreas.marine_protected_areas_2021')->label('MPA-2021'),
                 Tables\Columns\TextColumn::make('marineProtectedAreas.marine_protected_areas_2022')->label('MPA-2022'),
-            
+                
+                Tables\Columns\TextColumn::make('geojson')->label('Data Spasial Negara'),
             ])
             ->filters([
                 //
