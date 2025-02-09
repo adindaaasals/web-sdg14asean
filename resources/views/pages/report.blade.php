@@ -10,7 +10,7 @@
         <x-country-button 
             :countryID="$country->id" 
             :countryName="$country->country_name" 
-            :countryFlag="$country->country_flag ? asset('storage/' . $country->country_flag) : asset('images/BRN.png')" />
+            :countryFlag="$country->country_flag ? asset('storage/' . $country->country_flag) : asset('images/logo.png')" />
     @endforeach
 </div>
 @endsection

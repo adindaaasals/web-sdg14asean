@@ -5,7 +5,7 @@
     <h1 class="text-center mb-4">Marine Protected Areas - {{ $country }}</h1>
 </div>
 
-<!-- Peta akan muncul di sini -->
+{{-- Peta akan muncul di sini --}}
 <div class="relative h-screen px-10 py-5 z-0">
     <div id="mpaMap" class="h-[calc(100vh-100px)] w-full"></div>
     <div class="text-right text-xs">
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<!-- Leaflet JS -->
+{{-- Leaflet JS --}}
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -50,7 +50,6 @@
     })
     .catch(error => console.error('Error loading polygons:', error));
 
-        });
-    </script>
-
+    });
+</script>
 @endsection

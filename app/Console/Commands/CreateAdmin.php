@@ -27,7 +27,7 @@ class CreateAdmin extends Command
     public function handle()
     {
         $name = "admin";
-        $email = "admin@gmail.com";
+        $email = "admin@admin.com";
         $password = "adminpassword";
 
         $user = User::create([

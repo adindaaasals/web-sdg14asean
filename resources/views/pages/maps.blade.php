@@ -5,7 +5,7 @@
     <h1>ASEAN MAPS</h1>
 </div>
 
-{{-- Include buttonMaps --}}
+{{-- country-button-medium.. --}}
 <div class="hidden md:inline-flex md:rounded-md mt-5 md:mt-10 px-20 md:px-10 xl:px-8 xl:mx-10">
     <button
         type="button"
@@ -37,6 +37,7 @@
     </button>
 </div>
 
+{{-- country-button --}}
 <div class="flex flex-col md:hidden md:rounded-md mt-5 md:mt-10 px-20 md:px-10 xl:px-8 xl:mx-10">
     <button
         type="button"
@@ -73,11 +74,6 @@
     
 </div>
 
-{{-- <div id="statistics" class="mt-4 p-4 bg-gray-100 rounded shadow">
-    <h3 class="text-lg font-bold">Statistics:</h3>
-    <ul id="statisticsList" class="list-disc pl-5"></ul>
-</div> --}}
-
 <div class="flex items-center text-center space-x-4 mt-2 pl-10 xl:pl-20">
     <label for="yearSelect" class="text-xs md:text-sm lg:text-base font-bold text-black">Select Years:</label>
     <select id="yearSelect" class="block p-2 text-xs md:text-sm lg:text-base border border-gray-300 rounded">
@@ -106,10 +102,9 @@
     
 </div>
 
-{{-- Tambahkan dependensi Leaflet --}}
+{{-- Library Leaflet --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css" />
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/leaflet-choropleth"></script> --}}
 <script src="{{ asset('js/mapScript.js') }}"></script>
 
 @endsection

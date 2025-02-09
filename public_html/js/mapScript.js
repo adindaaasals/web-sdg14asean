@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    let currentIndicator = null; // Simpan indikator yang sedang aktif
+    let currentIndicator = null; // Menyimpan key focus area yang sedang aktif
 
-    // Tambahkan event listener untuk tombol indikator
+    // Menambahkan event listener untuk tombol key focus area
     document.querySelectorAll('button[data-api-url]').forEach(button => {
         console.log("Button Listener Added!");
         button.addEventListener('click', function () {
@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const method = this.getAttribute('data-method');
             const year = document.getElementById('yearSelect').value;
 
-            currentIndicator = { apiUrlBase, method }; // Simpan indikator aktif
-            updateIndicatorTitle(this); // Perbarui judul indikator
-            updateLegend(method);  // Update the legend according to the selected method
+            currentIndicator = { apiUrlBase, method }; // Menyimpan key focus area aktif
+            updateIndicatorTitle(this); // Perbarui judul key focus area
+            updateLegend(method);  // Update legend sesuai method yang digunakan
             updateColorDescription(method);
             
-            fetchDataAndUpdateMap(apiUrlBase, year, method); // Muat data dan perbarui peta
+            fetchDataAndUpdateMap(apiUrlBase, year, method); // Update data dan peta
         });
     });
 
@@ -34,15 +34,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    /**
-     * Muat data dari API dan perbarui peta
-     */
+     // Load data dari API dan udpate peta
     function fetchDataAndUpdateMap(apiUrlBase, year, method) {
         console.log("fetchDataAndUpdateMap Called!");
+
+        // Tampilkan loading state sebelum mengambil data
+        const statisticsElement = document.getElementById("statistics");
+        statisticsElement.textContent = "Loading maps..."; // Menampilkan teks loading
+        statisticsElement.style.display = "block"; // Pastikan loading terlihat
+
         const apiUrl = `${apiUrlBase}?year=${year}`;
         fetch(apiUrl, {
             headers: {
-                'Accept': 'application/json' // Tambahkan header Accept
+                'Accept': 'application/json' // header Accept
             }
         })
         
@@ -74,21 +78,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     },
                     onEachFeature: (feature, layer) => {
                         const countryName = feature.properties.name; // Ambil nama negara
-                        let value = feature.properties.value; // Ambil nilai indikator
+                        let value = feature.properties.value; // Ambil nilai key focus area
 
                         // Format angka dengan pemisah ribuan
                         let formattedValue = value !== null ? value.toLocaleString() : 'Data Unavailable';
 
-                        // Jika indikator adalah Marine Protected Areas, tambahkan simbol persen
+                        // Jika key focus area adalah Marine Protected Areas, tambahkan simbol persen
                         const indicatorTitle = document.getElementById('indicatorTitle').textContent.trim();
                         if (indicatorTitle.includes('Marine Protected Areas') && value !== null) {
                             // Konversi nilai menjadi persen dan batasi hanya 1 angka di belakang koma
                             formattedValue = (value * 100).toFixed(1) + '%';  // Mengalikan dengan 100 dan format dengan 1 desimal
                         }
 
-                        // Menentukan ukuran font untuk nama dan nilai
-                        const nameFontSize = '16px'; // Ukuran font untuk nama negara
-                        const valueFontSize = '14px'; // Ukuran font untuk nilai
+                        const nameFontSize = '16px'; 
+                        const valueFontSize = '14px'; 
 
                         layer.bindPopup(
                            `<div style="text-align: center;">` +
@@ -103,23 +106,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 const bounds = geoJsonLayer.getBounds();
                 map.fitBounds(bounds);
 
-                // Perbarui statistik
-                // updateStatistics(stats);
+                // Menghilangkan loading setelah data berhasil dimuat
+                statisticsElement.textContent = "Map loaded successfully!";
+                setTimeout(() => {
+                    statisticsElement.style.display = "none"; // Sembunyikan setelah beberapa detik
+                }, 2000);
             })
-            .catch(error => console.error("Error fetching data:", error));
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                statisticsElement.textContent = "Failed to load map data!";
+    });
     }
 
-    /**
-     * Perbarui judul indikator di UI
-     */
+    // Perbarui judul key focus area di UI
     function updateIndicatorTitle(button) {
         const indicatorTitle = document.getElementById('indicatorTitle');
         indicatorTitle.textContent = button.textContent.trim();
     }
 
-    /**
-     * Hitung statistik deskriptif
-     */
+    // Menghitung statistik deskriptif
     function calculateStatistics(values) {
         const sum = values.reduce((a, b) => a + b, 0);
         const avg = (sum / values.length).toFixed(2);
@@ -132,34 +137,20 @@ document.addEventListener("DOMContentLoaded", function () {
         return { avg, min, max, median, stdDev };
     }
 
-    /**
-     * Hitung median dari array nilai
-     */
-    function calculateMedian(values) {
-        values.sort((a, b) => a - b);
-        const mid = Math.floor(values.length / 2);
-        return values.length % 2 !== 0
-            ? values[mid]
-            : ((values[mid - 1] + values[mid]) / 2).toFixed(2);
-    }
-
-    /**
-     * Warna berdasarkan interval linear
-     */
+    // Pengelompokan warna berdasarkan interval linear
     function getColorLinear(value, stats) {
         value = parseFloat(value);  // Pastikan value adalah float/number
         const { min, max } = stats;
         const range = max - min;
         const intervals = range / 5;
-        
-        // Debugging: Menampilkan nilai min, max, dan interval di console
-    
-    console.table({
-        "Minimum": min,
-        "Maximum": max,
-        // "Range": range,
-        "Interval": intervals
-    });
+
+        // Debugging
+        console.table({
+            "Minimum": min,
+            "Maximum": max,
+            // "Range": range,
+            "Interval": intervals
+        });
     
         if (value <= min + intervals) return "#ffffcc";
         if (value <= min + 2 * intervals) return "#a1dab4";
@@ -168,11 +159,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return "#253494";
     }
 
-    /**
-     * Warna berdasarkan standar deviasi
-     */
+    // Pengelompokan warna berdasarkan standar deviasi
     function getColorStdDev(value, stats) {
-        // Pastikan avg dan stdDev dalam bentuk number
+        // Memastikan avg dan stdDev dalam bentuk angka
         const avg = parseFloat(stats.avg);
         const stdDev = parseFloat(stats.stdDev);
     
@@ -326,6 +315,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Menghitung median dari array nilai
+    function calculateMedian(values) {
+        values.sort((a, b) => a - b);
+        const mid = Math.floor(values.length / 2);
+        return values.length % 2 !== 0
+            ? values[mid]
+            : ((values[mid - 1] + values[mid]) / 2).toFixed(2);
+    }
+
     // document.querySelectorAll('button[data-api-url]').forEach(button => {
     //     button.addEventListener('click', function () {
     //         const method = this.getAttribute('data-method');
@@ -334,58 +332,57 @@ document.addEventListener("DOMContentLoaded", function () {
     //     });
     // });
 
-    /**
- * Render peta Marine Protected Areas menggunakan data JSON
- */
-function renderMPAMap(pointsData, polygonsData) {
-    // Pastikan elemen HTML dengan ID 'mpaMap' ada
-    if (!document.getElementById('mpaMap')) return;
 
-    // Inisialisasi peta
-    const map = L.map('mpaMap').setView([0, 118], 4);
+    // Render peta Marine Protected Areas menggunakan data JSON
+    function renderMPAMap(pointsData, polygonsData) {
+        // Memastikan elemen HTML dengan ID 'mpaMap' ada
+        if (!document.getElementById('mpaMap')) return;
 
-    // Tambahkan layer peta dasar
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+        // Inisialisasi peta
+        const map = L.map('mpaMap').setView([0, 118], 4);
 
-    // Tambahkan polygons GeoJSON
-    const polygonsLayer = L.geoJSON(polygonsData, {
-        style: {
-            color: '#2c7fb8',
-            fillColor: '#41b6c4',
-            fillOpacity: 0.6,
-            weight: 1
-        },
-        onEachFeature: (feature, layer) => {
-            const name = feature.properties?.NAME || "Protected Area";
-            layer.bindPopup(`<strong>${name}</strong>`);
-        }
-    }).addTo(map);
+        // Menambahkan layer peta dasar
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
 
-    // Tambahkan points GeoJSON
-    const pointsLayer = L.geoJSON(pointsData, {
-        pointToLayer: (feature, latlng) => {
-            return L.circleMarker(latlng, {
-                radius: 6,
-                fillColor: '#ff7800',
-                color: '#000',
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
-        },
-        onEachFeature: (feature, layer) => {
-            const name = feature.properties?.NAME || "Point of Interest";
-            layer.bindPopup(`<strong>${name}</strong>`);
-        }
-    }).addTo(map);
+        // Menambahkan polygons GeoJSON
+        const polygonsLayer = L.geoJSON(polygonsData, {
+            style: {
+                color: '#2c7fb8',
+                fillColor: '#41b6c4',
+                fillOpacity: 0.6,
+                weight: 1
+            },
+            onEachFeature: (feature, layer) => {
+                const name = feature.properties?.NAME || "Protected Area";
+                layer.bindPopup(`<strong>${name}</strong>`);
+            }
+        }).addTo(map);
 
-    // Kontrol layer (opsional)
-    L.control.layers(null, {
-        "Polygons": polygonsLayer,
-        "Points": pointsLayer
-    }).addTo(map);
-}
+        // Menambahkan points GeoJSON
+        const pointsLayer = L.geoJSON(pointsData, {
+            pointToLayer: (feature, latlng) => {
+                return L.circleMarker(latlng, {
+                    radius: 6,
+                    fillColor: '#ff7800',
+                    color: '#000',
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                });
+            },
+            onEachFeature: (feature, layer) => {
+                const name = feature.properties?.NAME || "Point of Interest";
+                layer.bindPopup(`<strong>${name}</strong>`);
+            }
+        }).addTo(map);
+
+        // Kontrol layer (opsional)
+        L.control.layers(null, {
+            "Polygons": polygonsLayer,
+            "Points": pointsLayer
+        }).addTo(map);
+    }
 });

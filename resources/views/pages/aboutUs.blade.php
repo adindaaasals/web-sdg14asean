@@ -16,7 +16,7 @@
         </div>
         <div class="xl:ml-[100px]">
             <h2 class="font-semibold">Dosen Pembimbing II</h2>
-            <p>Drs. Ino Suryana, M.Komp.</p>
+            <p>Drs. Ino Suryana, M.Kom.</p>
             <p>NIP. 19600115 198701 1 002</p>
         </div>
     </div>

@@ -28,7 +28,7 @@
     <hr class="border-[#F3EFEE]" />
     <div class="flex items-center justify-between">
       <span class="mt-0.5 text-[10px] md:text-xs text-white sm:text-center">
-        © 2024
+        © 2025
         <span class="mb-1 hover:underline">Copyright</span>
         . All Rights Reserved.
       </span>
