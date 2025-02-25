@@ -26,7 +26,10 @@ class TotalFisheriesProductionResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('total_fisheries_production_2020')->label('Total Fisheries Production in 2020')->numeric(),
                 Forms\Components\TextInput::make('total_fisheries_production_2021')->label('Total Fisheries Production in 2021')->numeric(),
-                Forms\Components\TextInput::make('total_fisheries_production_2022')->label('Total Fisheries Production in 2022')->numeric()
+                Forms\Components\TextInput::make('total_fisheries_production_2022')->label('Total Fisheries Production in 2022')->numeric(),
+                Forms\Components\TextInput::make('total_fisheries_production_2023')->label('Total Fisheries Production in 2023')->numeric(),
+                Forms\Components\TextInput::make('total_fisheries_production_2024')->label('Total Fisheries Production in 2024')->numeric(),
+                Forms\Components\TextInput::make('total_fisheries_production_2025')->label('Total Fisheries Production in 2025')->numeric()
             ]);
     }
 
@@ -38,6 +41,9 @@ class TotalFisheriesProductionResource extends Resource
                 Tables\Columns\TextColumn::make('total_fisheries_production_2020')->label('TFP-2020'),
                 Tables\Columns\TextColumn::make('total_fisheries_production_2021')->label('TFP-2021'),
                 Tables\Columns\TextColumn::make('total_fisheries_production_2022')->label('TFP-2022'),
+                Tables\Columns\TextColumn::make('total_fisheries_production_2023')->label('TFP-2023'),
+                Tables\Columns\TextColumn::make('total_fisheries_production_2024')->label('TFP-2024'),
+                Tables\Columns\TextColumn::make('total_fisheries_production_2025')->label('TFP-2025')
             ])
             ->filters([
                 //

@@ -39,7 +39,7 @@
         polygonsLayer = L.geoJSON(data, {
             style: {
                 color: '#2c7fb8',
-                fillColor: '#41b6c4',
+                fillColor: '#112e42',
                 fillOpacity: 0.6,
                 weight: 1
             }

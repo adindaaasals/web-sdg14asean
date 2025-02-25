@@ -26,7 +26,10 @@ class AquacultureProductionResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('aquaculture_production_2020')->label('Aquaculture Production in 2020')->numeric(),
                 Forms\Components\TextInput::make('aquaculture_production_2021')->label('Aquaculture Production in 2021')->numeric(),
-                Forms\Components\TextInput::make('aquaculture_production_2022')->label('Aquaculture Production in 2022')->numeric()
+                Forms\Components\TextInput::make('aquaculture_production_2022')->label('Aquaculture Production in 2022')->numeric(),
+                Forms\Components\TextInput::make('aquaculture_production_2023')->label('Aquaculture Production in 2023')->numeric(),
+                Forms\Components\TextInput::make('aquaculture_production_2024')->label('Aquaculture Production in 2024')->numeric(),
+                Forms\Components\TextInput::make('aquaculture_production_2025')->label('Aquaculture Production in 2025')->numeric()
             ]);
     }
 
@@ -38,6 +41,9 @@ class AquacultureProductionResource extends Resource
                 Tables\Columns\TextColumn::make('aquaculture_production_2020')->label('AP-2020'),
                 Tables\Columns\TextColumn::make('aquaculture_production_2021')->label('AP-2021'),
                 Tables\Columns\TextColumn::make('aquaculture_production_2022')->label('AP-2022'),
+                Tables\Columns\TextColumn::make('aquaculture_production_2023')->label('AP-2023'),
+                Tables\Columns\TextColumn::make('aquaculture_production_2024')->label('AP-2024'),
+                Tables\Columns\TextColumn::make('aquaculture_production_2025')->label('AP-2025'),
             ])
             ->filters([
                 //

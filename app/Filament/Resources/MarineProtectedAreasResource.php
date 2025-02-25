@@ -27,9 +27,12 @@ class MarineProtectedAreasResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('marine_protected_areas_2020')->label('Marine Protected Areas in 2020')->numeric(),
-                Forms\Components\TextInput::make('marine_protected_areas_2021')->label('Marine Protected Areas in 2020')->numeric(),
-                Forms\Components\TextInput::make('marine_protected_areas_2022')->label('Marine Protected Areas in 2020')->numeric(),
-                
+                Forms\Components\TextInput::make('marine_protected_areas_2021')->label('Marine Protected Areas in 2021')->numeric(),
+                Forms\Components\TextInput::make('marine_protected_areas_2022')->label('Marine Protected Areas in 2022')->numeric(),
+                Forms\Components\TextInput::make('marine_protected_areas_2023')->label('Marine Protected Areas in 2023')->numeric(),
+                Forms\Components\TextInput::make('marine_protected_areas_2024')->label('Marine Protected Areas in 2024')->numeric(),
+                Forms\Components\TextInput::make('marine_protected_areas_2025')->label('Marine Protected Areas in 2025')->numeric(),
+
                 FileUpload::make('polygon_file')
                     ->label('Upload Polygon File (GeoJSON)')
                     ->directory('mpa_data') // Folder penyimpanan file
@@ -60,6 +63,9 @@ class MarineProtectedAreasResource extends Resource
                 Tables\Columns\TextColumn::make('marine_protected_areas_2020')->label('MPA-2020'),
                 Tables\Columns\TextColumn::make('marine_protected_areas_2021')->label('MPA-2021'),
                 Tables\Columns\TextColumn::make('marine_protected_areas_2022')->label('MPA-2022'),
+                Tables\Columns\TextColumn::make('marine_protected_areas_2023')->label('MPA-2023'),
+                Tables\Columns\TextColumn::make('marine_protected_areas_2024')->label('MPA-2024'),
+                Tables\Columns\TextColumn::make('marine_protected_areas_2025')->label('MPA-2025'),
                 Tables\Columns\TextColumn::make('polygon_data_json')
                     ->label('Polygon File Path')
                     ->url(fn ($record) => Storage::url($record->polygon_data_json)) // Tautan untuk melihat file
